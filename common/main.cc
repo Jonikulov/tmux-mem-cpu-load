@@ -92,7 +92,7 @@ std::string cpu_string( CPU_MODE cpu_mode, unsigned int cpu_usage_delay, unsigne
     oss << get_graph_by_percentage( unsigned( percentage ), graph_lines );
     oss << "]";
   }
-  oss.width( 6 );
+  oss.width( 4 );
   oss.setf( std::ios::fixed, std::ios::floatfield );
   oss.precision( 1 );
   oss.fill( ' ' );
