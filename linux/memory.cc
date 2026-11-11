@@ -32,6 +32,7 @@ void mem_status( MemoryStatus & status )
 
   unsigned int total_mem;
   unsigned int used_mem;
+  unsigned int avail_mem = 0;
 
   /* Since linux uses some RAM for disk caching, the actuall used ram is lower
    * than what sysinfo(), top or free reports. htop reports the usage in a
@@ -72,6 +73,10 @@ void mem_status( MemoryStatus & status )
     {
       used_mem = total_mem - stol( line.substr( substr_start, substr_len ) );
     }
+    else if( substr.compare( "MemAvailable" ) == 0 )
+    {
+      avail_mem = stol( line.substr( substr_start, substr_len ) );
+    }
     else if( substr.compare( "Shmem" ) == 0 )
     {
       used_mem += stol( line.substr( substr_start, substr_len ) );
@@ -83,6 +88,10 @@ void mem_status( MemoryStatus & status )
       used_mem -= stol( line.substr( substr_start, substr_len ) );
     }
   }
+
+  // match free/btop: used = total - available
+  if( avail_mem )
+    used_mem = total_mem - avail_mem;
 
   // we want megabytes on output, but since the values already come as
   // kilobytes we need to divide them by 1024 only once, thus we use
