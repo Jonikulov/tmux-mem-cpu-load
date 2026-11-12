@@ -65,7 +65,7 @@ std::string get_graph_vert( unsigned value )
 {
   static const std::map<unsigned, std::string> graph_chars = {
     { 0, " " }, { 10, "▁" }, { 20, "▂" }, { 30, "▃" }, { 40, "▄" },
-    { 50, "▅" }, { 60, "▆" }, { 70, "▇" }, { 80, "█" }, { 90, "▲" }
+    { 50, "▅" }, { 60, "▆" }, { 70, "▇" }, { 80, "█" }, { 90, "▓" }
   };
 
   for( auto it = graph_chars.rbegin(); it != graph_chars.rend(); ++it )
